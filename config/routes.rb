@@ -4,4 +4,5 @@ Rails.application.routes.draw do
 
   post '/tests/create', to: 'gt_metrix_tests#create_test'
   get '/tests', to: 'gt_metrix_tests#tests'
+  get '/tests/:id', to: 'gt_metrix_tests#test'
 end

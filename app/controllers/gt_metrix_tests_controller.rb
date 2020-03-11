@@ -18,10 +18,15 @@ class GtMetrixTestsController < ApplicationController
       test.test_id = json['test_id']
       test.state = 'queued'
       test.save
+      UpdateTaskStatusJob.set(wait: 1.minute).perform_later(test)
 
       render json: test, status: response.code
     else
       render json: json, status: response.code
     end
+  end
+
+  def test
+    render json: Test.find(params['id'])
   end
 end
