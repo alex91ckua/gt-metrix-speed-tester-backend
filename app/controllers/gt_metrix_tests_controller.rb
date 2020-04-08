@@ -17,6 +17,7 @@ class GtMetrixTestsController < ApplicationController
       test = Test.new
       test.test_id = json['test_id']
       test.state = 'queued'
+      test.url = params['url']
       test.save
       UpdateTaskStatusJob.set(wait: 1.minute).perform_later(test)
 
